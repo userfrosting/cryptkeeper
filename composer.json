@@ -1,0 +1,21 @@
+{
+    "name": "userfrosting/cryptkeeper",
+    "type": "userfrosting-sprinkle",
+    "description": "Cryptocurrency portfolio tracking and management Sprinkle.",
+    "homepage": "https://github.com/userfrosting/cryptkeeper",
+    "license" : "MIT",
+    "authors" : [
+        {
+            "name": "Alexander Weissman",
+            "homepage": "https://alexanderweissman.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "UserFrosting\\Sprinkle\\Cryptkeeper\\": "src/"
+        }
+    },
+    "extra": {
+        "installer-name": "cryptkeeper"
+    }
+}
