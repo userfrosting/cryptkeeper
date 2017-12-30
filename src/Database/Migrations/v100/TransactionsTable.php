@@ -39,7 +39,7 @@ class TransactionsTable extends Migration
             $this->schema->create('transactions', function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('user_id')->unsigned();
-                $table->string('market_id', 50)->nullable();
+                $table->integer('market_id')->unsigned();
                 // Holding that you are selling
                 $table->integer('from_holding_id')->unsigned();
                 // Holding that you are buying
