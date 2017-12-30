@@ -110,10 +110,12 @@ class Member extends User
      */
     protected function createAuxIfNotExists()
     {
+        $config = static::$ci->config;
+
         if ($this->auxType && !count($this->aux)) {
-            // Create aux model and set primary key to be the same as the main user's
+            // Create aux model and set default fiat currency id
             $aux = new $this->auxType;
-            $aux->fiat_currency_id = 1;
+            $aux->fiat_currency_id = $config['site.currencies.fiat_default_id'];
 
             // Needed to immediately hydrate the relation.  It will actually get saved in the bootLinkMemberAux method.
             $this->setRelation('aux', $aux);
