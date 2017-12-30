@@ -15,8 +15,8 @@
                 <th class="sorter-metatext" data-column-name="symbol" data-column-template="#holding-table-column-symbol">Symbol <i class="fa fa-sort"></i></th>
                 <th class="sorter-metatext" data-column-name="note" data-column-template="#holding-table-column-note">Note <i class="fa fa-sort"></i></th>
                 <th class="sorter-metanum" data-column-name="balance" data-column-template="#holding-table-column-balance">Balance <i class="fa fa-sort"></i></th>
-                <th class="sorter-metanum" data-column-name="price_fiat" data-column-template="#holding-table-column-price-fiat">Price (USD) <i class="fa fa-sort"></i></th>
-                <th class="sorter-metanum" data-column-name="price_btc" data-column-template="#holding-table-column-price-btc">Price (BTC) <i class="fa fa-sort"></i></th>
+                <th class="sorter-metanum" data-column-name="value_fiat" data-column-template="#holding-table-column-value-fiat">Value (USD) <i class="fa fa-sort"></i></th>
+                <th class="sorter-metanum" data-column-name="value_btc" data-column-template="#holding-table-column-value-btc">Value (BTC) <i class="fa fa-sort"></i></th>
             </tr>
         </thead>
         <tbody>
@@ -60,20 +60,20 @@
         </td>
     </script>
 
-    <script id="holding-table-column-price-fiat" type="text/x-handlebars-template">
+    <script id="holding-table-column-value-fiat" type="text/x-handlebars-template">
         <td>
-            {{#if row.price_fiat}}
-                {{currencyUsdFormat row.price_fiat}}
+            {{#if row.value_fiat}}
+                {{currencyUsdFormat row.value_fiat}}
             {{else}}
                 -
             {{/if}}
         </td>
     </script>
 
-    <script id="holding-table-column-price-btc" type="text/x-handlebars-template">
+    <script id="holding-table-column-value-btc" type="text/x-handlebars-template">
         <td>
-            {{#if row.price_btc}}
-                {{row.price_btc}}
+            {{#if row.value_btc}}
+                {{row.value_btc}}
             {{else}}
                 -
             {{/if}}
