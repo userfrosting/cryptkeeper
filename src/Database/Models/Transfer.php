@@ -11,9 +11,9 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 use UserFrosting\Sprinkle\Core\Database\Models\Model;
 
 /**
- * Represents a user's current holdings of a specific currency.
+ * Represents a transfer in to or out of a holding.
  */
-class Holding extends Model
+class Transfer extends Model
 {
     public $timestamps = true;
 
@@ -26,13 +26,13 @@ class Holding extends Model
 
     protected $fillable = [
         'user_id',
-        'currency_id',
-        'balance',
+        'holding_id',
+        'amount',
         'note'
     ];
 
     /**
-     * The user who owns this holding.
+     * The user who performed this transfer.
      */
     public function user()
     {
@@ -40,10 +40,10 @@ class Holding extends Model
     }
 
     /**
-     * The currency this holding consists of.
+     * The holding this transfer was performed upon.
      */
-    public function currency()
+    public function holding()
     {
-        return $this->belongsTo('UserFrosting\Sprinkle\Cryptkeeper\Database\Models\Currency', 'currency_id');
+        return $this->belongsTo('UserFrosting\Sprinkle\Cryptkeeper\Database\Models\Holding', 'holding_id');
     }
 }

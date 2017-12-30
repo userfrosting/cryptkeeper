@@ -50,6 +50,7 @@ class TransactionsTable extends Migration
                 $table->float('price');
                 // Transaction fee (in primary currency)
                 $table->float('fee');
+                $table->text('note');
                 $table->timestamps();
 
                 $table->engine = 'InnoDB';

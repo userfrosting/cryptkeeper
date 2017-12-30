@@ -63,7 +63,8 @@ class Transaction extends Model
         'to_holding_id',
         'quantity',
         'price',
-        'fee'
+        'fee',
+        'note'
     ];
 
     /**

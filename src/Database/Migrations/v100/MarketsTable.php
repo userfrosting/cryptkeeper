@@ -10,6 +10,8 @@ namespace UserFrosting\Sprinkle\Cryptkeeper\Database\Migrations\v100;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Builder;
+use UserFrosting\Sprinkle\Cryptkeeper\Database\Models\Currency;
+use UserFrosting\Sprinkle\Cryptkeeper\Database\Models\Market;
 use UserFrosting\System\Bakery\Migration;
 
 /**
@@ -56,7 +58,34 @@ class MarketsTable extends Migration
      */
     public function seed()
     {
+        $usd = Currency::where('symbol', 'USD')->first();
+        $gbp = Currency::where('symbol', 'GBP')->first();
+        $btc = Currency::where('symbol', 'BTC')->first();
+        $eth = Currency::where('symbol', 'ETH')->first();
+        $ltc = Currency::where('symbol', 'LTC')->first();
 
+        $markets = [
+            'usd-btc' => new Market([
+                'primary_currency_id' => $usd->id,
+                'secondary_currency_id' => $btc->id
+            ]),
+            'gbp-btc' => new Market([
+                'primary_currency_id' => $gbp->id,
+                'secondary_currency_id' => $btc->id
+            ]),
+            'btc-eth' => new Market([
+                'primary_currency_id' => $btc->id,
+                'secondary_currency_id' => $eth->id
+            ]),
+            'btc-ltc' => new Market([
+                'primary_currency_id' => $btc->id,
+                'secondary_currency_id' => $ltc->id
+            ])
+        ];
+
+        foreach ($markets as $id => $market) {
+            $market->save();
+        }
     }
 
     /**
