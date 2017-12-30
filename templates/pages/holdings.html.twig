@@ -1,0 +1,45 @@
+{% extends "pages/abstract/dashboard.html.twig" %}
+
+{% block stylesheets_page %}
+    <!-- Page-specific CSS asset bundle -->
+    {{ assets.css('css/form-widgets') | raw }}
+{% endblock %}
+
+{# Overrides blocks in head of base template #}
+{% block page_title %}My Holdings{% endblock %}
+
+{% block page_description %}{% endblock %}
+
+{% block body_matter %}
+    <div class="row">
+        <div class="col-md-12">
+            <div id="widget-holdings" class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title"><i class="fa fa-fw fa-briefcase"></i> Holdings</h3>
+                    {% include "tables/table-tool-menu.html.twig" %}
+                </div>
+                <div class="box-body">
+                    {% include "tables/holdings.html.twig" with {
+                            "table" : {
+                                "id" : "table-holdings"
+                            }
+                        }
+                    %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts_page %}
+    <!-- Include validation rules -->
+    <script>
+    {% include "pages/partials/page.js.twig" %}
+    </script>
+
+    <!-- Include form widgets JS -->
+    {{ assets.js('js/form-widgets') | raw }}
+
+    <!-- Include page-specific JS -->
+    {{ assets.js('js/pages/holdings') | raw }}
+
+{% endblock %}

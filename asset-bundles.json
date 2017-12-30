@@ -43,6 +43,18 @@
                     }
                 }
             }
+        },
+        "js/pages/holdings": {
+            "scripts": [
+                "js/pages/holdings.js"
+            ],
+            "options": {
+                "result": {
+                    "type": {
+                        "scripts": "plain"
+                    }
+                }
+            }
         }
     }
 }

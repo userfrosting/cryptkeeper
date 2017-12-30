@@ -46,4 +46,23 @@ class Holding extends Model
     {
         return $this->belongsTo('UserFrosting\Sprinkle\Cryptkeeper\Database\Models\Currency', 'currency_id');
     }
+
+    /**
+     * Joins the currency for this holding, so we can do things like sort, search, paginate, etc.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeJoinCurrency($query)
+    {
+        $query->select('holdings.*');
+        $query->addSelect(
+            'currencies.name as name',
+            'currencies.symbol as symbol'
+        );
+
+        $query->leftJoin('currencies', 'currencies.id', '=', 'holdings.currency_id');
+
+        return $query;
+    }
 }
