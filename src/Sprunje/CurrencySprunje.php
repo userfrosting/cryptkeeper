@@ -8,9 +8,9 @@
 namespace UserFrosting\Sprinkle\Cryptkeeper\Sprunje;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
-use GuzzleHttp\Client as Guzzle;
 use UserFrosting\Sprinkle\Core\Sprunje\Sprunje;
 use UserFrosting\Sprinkle\Core\Facades\Debug;
+use UserFrosting\Sprinkle\Cryptkeeper\Api\CoinMarketCap;
 use UserFrosting\Sprinkle\Cryptkeeper\Database\Models\Currency;
 
 /**
@@ -50,21 +50,15 @@ class CurrencySprunje extends Sprunje
 
     protected function applyTransformations($collection)
     {
-        // Retrieve coinmarketcap quotes and map by CMC id
-        $client = new Guzzle;
-        $response = $client->request('GET', 'https://api.coinmarketcap.com/v1/ticker');
-        $quotes = collect(json_decode($response->getBody(), true));
-
-        $quotesKeyed = $quotes->mapWithKeys(function ($item) {
-            return [$item['id'] => $item];
-        });
+        $cmc = new CoinMarketCap();
+        $quotes = $cmc->getQuotes();
 
         // Map fiat and BTC prices to currencies in database
-        $collection->transform(function ($item, $key) use ($quotesKeyed) {
+        $collection->transform(function ($item, $key) use ($quotes) {
             $name = $item->name_cmc;
-            $quote = isset($quotesKeyed[$name]) ? $quotesKeyed[$name] : null;
+            $quote = isset($quotes[$name]) ? $quotes[$name] : null;
             if ($quote) {
-                $item->price_usd = $quote['price_usd'];
+                $item->price_fiat = $quote['price_usd'];
                 $item->price_btc = $quote['price_btc'];
             }
 
