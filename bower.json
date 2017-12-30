@@ -1,0 +1,16 @@
+{
+    "name": "userfrosting-cryptkeeper",
+    "authors": [
+        {
+            "name": "Alexander Weissman",
+            "homepage": "https://alexanderweissman.com"
+        }
+    ],
+    "dependencies": {
+        "jquery.inputmask": "*",
+        "eonasdan-bootstrap-datetimepicker" : "#latest"
+    },
+    "moduleType": [
+        "node"
+    ]
+}

@@ -1,0 +1,48 @@
+{
+    "bundle": {
+        "css/form-widgets": {
+            "styles": [
+                "vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css",
+                "userfrosting/css/uf-collection.css"
+            ],
+            "options": {
+                "result": {
+                    "type": {
+                        "styles": "plain"
+                    }
+                }
+            }
+        },
+        "js/form-widgets": {
+            "scripts": [
+                "vendor/moment/moment.js",
+                "vendor/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js",
+                "vendor/jquery.inputmask/dist/inputmask/inputmask.js",
+                "vendor/jquery.inputmask/dist/inputmask/inputmask.extensions.js",
+                "vendor/jquery.inputmask/dist/inputmask/jquery.inputmask.js",
+                "vendor/jquery.inputmask/dist/inputmask/bindings/inputmask.binding.js",
+                "vendor/speakingurl/speakingurl.min.js",
+                "userfrosting/js/uf-collection.js"
+            ],
+            "options": {
+                "result": {
+                    "type": {
+                        "scripts": "plain"
+                    }
+                }
+            }
+        },
+        "js/pages/currencies": {
+            "scripts": [
+                "js/pages/currencies.js"
+            ],
+            "options": {
+                "result": {
+                    "type": {
+                        "scripts": "plain"
+                    }
+                }
+            }
+        }
+    }
+}

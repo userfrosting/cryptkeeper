@@ -65,4 +65,27 @@ class CurrencyController extends SimpleController
         // For example, if you plan to insert it into an HTML DOM, you must escape it on the client side (or use client-side templating).
         return $sprunje->toResponse($response);
     }
+
+    /**
+     * Renders the currency listing page.
+     *
+     * This page renders a table of currencies.
+     * This page requires authentication.
+     * Request type: GET
+     */
+    public function pageList($request, $response, $args)
+    {
+        /** @var UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager */
+        $authorizer = $this->ci->authorizer;
+
+        /** @var UserFrosting\Sprinkle\Account\Database\Models\User $currentUser */
+        $currentUser = $this->ci->currentUser;
+
+        // Access-controlled page
+        if (!$authorizer->checkAccess($currentUser, 'uri_currencies')) {
+            throw new ForbiddenException();
+        }
+
+        return $this->ci->view->render($response, 'pages/currencies.html.twig');
+    }
 }

@@ -1,0 +1,65 @@
+{# This partial template renders a table to be populated with rows via an AJAX request.
+ # This extends a generic template for paginated tables.
+ #
+ # Note that this template contains a "skeleton" table with an empty table body, and then a block of Handlebars templates which are used
+ # to render the table cells with the data from the AJAX request.
+#}
+
+{% extends "tables/table-paginated.html.twig" %}
+
+{% block table %}
+    <table id="{{table.id}}" class="tablesorter table table-bordered table-hover table-striped" data-sortlist="[[0, 0]]">
+        <thead>
+            <tr>
+                <th class="sorter-metatext" data-column-name="name" data-column-template="#currency-table-column-name">Currency <i class="fa fa-sort"></i></th>
+                <th class="sorter-metatext" data-column-name="symbol" data-column-template="#currency-table-column-symbol">Symbol <i class="fa fa-sort"></i></th>
+                <th class="sorter-metanum" data-column-name="price_fiat" data-column-template="#currency-table-column-price-fiat">Price (USD) <i class="fa fa-sort"></i></th>
+                <th class="sorter-metanum" data-column-name="price_btc" data-column-template="#currency-table-column-price-btc">Price (BTC) <i class="fa fa-sort"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block table_cell_templates %}
+    {# This contains a series of <script> blocks, each of which is a client-side Handlebars template.
+     # Note that these are NOT Twig templates, although the syntax is similar.  We wrap them in the `verbatim` tag,
+     # so that Twig will output them directly into the DOM instead of trying to treat them like Twig templates.
+     #
+     # These templates require handlebars-helpers.js, moment.js
+    #}
+    {% verbatim %}
+    <script id="currency-table-column-name" type="text/x-handlebars-template">
+        <td>
+            {{row.name}}
+        </td>
+    </script>
+
+    <script id="currency-table-column-symbol" type="text/x-handlebars-template">
+        <td>
+            {{row.symbol}}
+        </td>
+    </script>
+
+    <script id="currency-table-column-price-fiat" type="text/x-handlebars-template">
+        <td>
+            {{#if row.price_fiat}}
+                {{currencyUsdFormat row.price_fiat}}
+            {{else}}
+                -
+            {{/if}}
+        </td>
+    </script>
+
+    <script id="currency-table-column-price-btc" type="text/x-handlebars-template">
+        <td>
+            {{#if row.price_btc}}
+                {{row.price_btc}}
+            {{else}}
+                -
+            {{/if}}
+        </td>
+    </script>
+    {% endverbatim %}
+{% endblock %}

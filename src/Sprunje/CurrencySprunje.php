@@ -28,6 +28,8 @@ class CurrencySprunje extends Sprunje
         'name',
         'name_cmc',
         'symbol',
+        'price_fiat',
+        'price_btc',
         'created_at'
     ];
 
@@ -35,6 +37,8 @@ class CurrencySprunje extends Sprunje
         'name',
         'name_cmc',
         'symbol',
+        'price_fiat',
+        'price_btc',
         'created_at'
     ];
 
@@ -66,5 +70,17 @@ class CurrencySprunje extends Sprunje
         });
 
         return $collection;
+    }
+
+    /**
+     * Sort based on fiat price.
+     *
+     * @param Builder $query
+     * @param string $direction
+     * @return Builder
+     */
+    protected function sortPriceFiat($query, $direction)
+    {
+        $query->orderBy('price_usd', $direction);
     }
 }
