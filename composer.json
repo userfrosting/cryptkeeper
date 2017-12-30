@@ -10,6 +10,9 @@
             "homepage": "https://alexanderweissman.com"
         }
     ],
+    "require": {
+        "guzzlehttp/guzzle": "*"
+    },
     "autoload": {
         "psr-4": {
             "UserFrosting\\Sprinkle\\Cryptkeeper\\": "src/"
