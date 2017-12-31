@@ -29,4 +29,12 @@ class Currency extends Model
         'name_cmc',
         'symbol'
     ];
+
+    /**
+     * Markets where this is the primary currency.
+     */
+    public function primaryMarkets()
+    {
+        return $this->hasMany('UserFrosting\Sprinkle\Cryptkeeper\Database\Models\Market', 'primary_currency_id');
+    }
 }

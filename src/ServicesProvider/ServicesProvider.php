@@ -4,6 +4,9 @@
 
 namespace UserFrosting\Sprinkle\Cryptkeeper\ServicesProvider;
 
+use GuzzleHttp\Client as Guzzle;
+use UserFrosting\Sprinkle\Cryptkeeper\Api\CoinMarketCap;
+
 class ServicesProvider
 {
     /**
@@ -22,5 +25,14 @@ class ServicesProvider
             $classMapper->setClassMapping('user', 'UserFrosting\Sprinkle\Cryptkeeper\Database\Models\Member');
             return $classMapper;
         });
+
+        /**
+         * Exposes a CoinMarketCap instance.
+         */
+        $container['cmc'] = function ($c) {
+            $guzzle = new Guzzle;
+            $cmc = new CoinMarketCap($guzzle);
+            return $cmc;
+        };
     }
 }

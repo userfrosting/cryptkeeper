@@ -19,7 +19,9 @@
                 'fiat_available' => [
                     'USD', 'CAD', 'GBP', 'AUD'
                 ],
-                'fiat_default_id' => 1
+                'fiat_default_id' => 1,
+                // Time, in seconds, we should wait before refreshing the market quotes
+                'refresh_interval' => 60
             ]
         ]
     ];

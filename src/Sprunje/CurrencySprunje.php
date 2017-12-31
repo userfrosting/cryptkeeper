@@ -7,10 +7,8 @@
  */
 namespace UserFrosting\Sprinkle\Cryptkeeper\Sprunje;
 
-use Illuminate\Database\Capsule\Manager as Capsule;
 use UserFrosting\Sprinkle\Core\Sprunje\Sprunje;
 use UserFrosting\Sprinkle\Core\Facades\Debug;
-use UserFrosting\Sprinkle\Cryptkeeper\Api\CoinMarketCap;
 use UserFrosting\Sprinkle\Cryptkeeper\Database\Models\Currency;
 
 /**
@@ -28,8 +26,6 @@ class CurrencySprunje extends Sprunje
         'name',
         'name_cmc',
         'symbol',
-        'price_fiat',
-        'price_btc',
         'created_at'
     ];
 
@@ -37,8 +33,6 @@ class CurrencySprunje extends Sprunje
         'name',
         'name_cmc',
         'symbol',
-        'price_fiat',
-        'price_btc',
         'created_at'
     ];
 
@@ -50,37 +44,5 @@ class CurrencySprunje extends Sprunje
         $query = (new Currency())->newQuery();
 
         return $query;
-    }
-
-    protected function applyTransformations($collection)
-    {
-        $cmc = new CoinMarketCap();
-        $quotes = $cmc->getQuotes();
-
-        // Map fiat and BTC prices to currencies in database
-        $collection->transform(function ($item, $key) use ($quotes) {
-            $name = $item->name_cmc;
-            $quote = isset($quotes[$name]) ? $quotes[$name] : null;
-            if ($quote) {
-                $item->price_fiat = $quote['price_usd'];
-                $item->price_btc = $quote['price_btc'];
-            }
-
-            return $item;
-        });
-
-        return $collection;
-    }
-
-    /**
-     * Sort based on fiat price.
-     *
-     * @param Builder $query
-     * @param string $direction
-     * @return Builder
-     */
-    protected function sortPriceFiat($query, $direction)
-    {
-        $query->orderBy('price_usd', $direction);
     }
 }

@@ -13,8 +13,6 @@
             <tr>
                 <th class="sorter-metatext" data-column-name="name" data-column-template="#currency-table-column-name">Currency <i class="fa fa-sort"></i></th>
                 <th class="sorter-metatext" data-column-name="symbol" data-column-template="#currency-table-column-symbol">Symbol <i class="fa fa-sort"></i></th>
-                <th class="sorter-metanum" data-column-name="price_fiat" data-column-template="#currency-table-column-price-fiat">Price (USD) <i class="fa fa-sort"></i></th>
-                <th class="sorter-metanum" data-column-name="price_btc" data-column-template="#currency-table-column-price-btc">Price (BTC) <i class="fa fa-sort"></i></th>
             </tr>
         </thead>
         <tbody>
@@ -39,26 +37,6 @@
     <script id="currency-table-column-symbol" type="text/x-handlebars-template">
         <td>
             {{row.symbol}}
-        </td>
-    </script>
-
-    <script id="currency-table-column-price-fiat" type="text/x-handlebars-template">
-        <td>
-            {{#if row.price_fiat}}
-                {{currencyUsdFormat row.price_fiat}}
-            {{else}}
-                -
-            {{/if}}
-        </td>
-    </script>
-
-    <script id="currency-table-column-price-btc" type="text/x-handlebars-template">
-        <td>
-            {{#if row.price_btc}}
-                {{row.price_btc}}
-            {{else}}
-                -
-            {{/if}}
         </td>
     </script>
     {% endverbatim %}

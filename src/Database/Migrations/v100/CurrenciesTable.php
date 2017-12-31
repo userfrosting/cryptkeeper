@@ -52,6 +52,7 @@ class CurrenciesTable extends Migration
         $currencies = [
             'usd' => new Currency([
                 'name' => 'US Dollar',
+                'name_cmc' => 'USD',
                 'symbol' => 'USD'
             ]),
             'cad' => new Currency([

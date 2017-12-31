@@ -10,7 +10,6 @@ namespace UserFrosting\Sprinkle\Cryptkeeper\Sprunje;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use UserFrosting\Sprinkle\Core\Sprunje\Sprunje;
 use UserFrosting\Sprinkle\Core\Facades\Debug;
-use UserFrosting\Sprinkle\Cryptkeeper\Api\CoinMarketCap;
 use UserFrosting\Sprinkle\Cryptkeeper\Database\Models\Holding;
 
 /**
