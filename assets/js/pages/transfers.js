@@ -21,6 +21,13 @@ function attachTransferForm() {
         /**
          * Set up modal widgets
          */
+
+        // Initialize date/time pickers
+        form.find('.js-date-picker').datetimepicker({
+            format: 'MM/DD/YYYY LT'
+        });
+
+        // Dropdown for selecting transfer currency
         form.find("select[name=currency_id]").select2();
 
         // Set up the form for submission

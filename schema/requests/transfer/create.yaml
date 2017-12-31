@@ -1,4 +1,8 @@
 ---
+completed_at:
+  validators:
+    required:
+      message: Please specify the date/time of the transfer.
 currency_id:
   validators:
     required:

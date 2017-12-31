@@ -22,6 +22,9 @@
                 'fiat_default_id' => 1,
                 // Time, in seconds, we should wait before refreshing the market quotes
                 'refresh_interval' => 60
-            ]
+            ],
+            'formats' => [
+                'datetime' => 'm/d/Y h:i+A'
+            ],
         ]
     ];

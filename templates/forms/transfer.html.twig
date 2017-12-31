@@ -17,7 +17,17 @@
                 </div>
             </div>
         </div>
-    
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Date/Time</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+                    <input type="text" class="form-control js-date-picker" name="completed_at" autocomplete="off" value="{{transfer.completed_at}}" placeholder="Date/time" {% if 'completed_at' in form.fields.disabled %}disabled{% endif %}>
+                </div>
+            </div>
+        </div>
+
         <div class="col-sm-6">
             <div class="form-group">
                 <label>Amount</label>

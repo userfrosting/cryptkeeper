@@ -56,7 +56,8 @@ class Transfer extends Model
         'user_id',
         'holding_id',
         'amount',
-        'note'
+        'note',
+        'completed_at'
     ];
 
     /**

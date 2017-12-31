@@ -41,6 +41,7 @@ class TransfersTable extends Migration
                 $table->integer('holding_id')->unsigned();
                 $table->double('amount', 20, 10)->default(0);
                 $table->text('note');
+                $table->timestamp('completed_at');
                 $table->timestamps();
 
                 $table->engine = 'InnoDB';

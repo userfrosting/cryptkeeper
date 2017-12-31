@@ -84,7 +84,7 @@ class TransferController extends SimpleController
         /** @var Config $config */
         $config = $this->ci->config;
 
-        // All checks passed!  log events/activities and create course
+        // All checks passed!  log events/activities and create transfer
         // Begin transaction - DB will be rolled back if an exception occurs
         Capsule::transaction( function() use ($classMapper, $data, $ms, $config, $currentUser) {
             // Get the holding for the current user and currency
@@ -104,10 +104,13 @@ class TransferController extends SimpleController
             $data['user_id'] = $currentUser->id;
             $data['holding_id'] = $holding->id;
 
+            // Transform date
+            $data['completed_at'] = Carbon::createFromFormat($config['site.formats.datetime'], $data['completed_at']);
+
             // Create the transfer
             $transfer = new Transfer($data);
 
-            // Store new course to database
+            // Store new transfer to database
             $transfer->save();
 
             // Create activity record

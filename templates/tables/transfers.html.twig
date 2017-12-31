@@ -11,6 +11,7 @@
     <table id="{{table.id}}" class="tablesorter table table-bordered table-hover table-striped" data-sortlist="[[0, 0]]">
         <thead>
             <tr>
+                <th class="sorter-metanum" data-column-name="completed_at" data-column-template="#transfer-table-column-completed-at">Date/Time <i class="fa fa-sort"></i></th>
                 <th class="sorter-metatext" data-column-name="name" data-column-template="#transfer-table-column-name">Currency <i class="fa fa-sort"></i></th>
                 <th class="sorter-metatext" data-column-name="symbol" data-column-template="#transfer-table-column-symbol">Symbol <i class="fa fa-sort"></i></th>
                 <th class="sorter-metanum" data-column-name="amount" data-column-template="#transfer-table-column-amount">Amount <i class="fa fa-sort"></i></th>
@@ -30,6 +31,17 @@
      # These templates require handlebars-helpers.js, moment.js
     #}
     {% verbatim %}
+    <script id="transfer-table-column-completed-at" type="text/x-handlebars-template">
+        {{#if row.completed_at }}
+        <td data-num="{{dateFormat row.completed_at format='x'}}">
+            {{dateFormat row.completed_at format="dddd"}}<br>{{dateFormat row.completed_at format="MMM Do, YYYY h:mm a"}}
+        {{ else }}
+        <td data-num="0">
+            <i>{% endverbatim %}{{translate("UNKNOWN")}}{% verbatim %}</i>
+        {{/if }}
+        </td>
+    </script>
+
     <script id="transfer-table-column-name" type="text/x-handlebars-template">
         <td>
             {{row.name}}
