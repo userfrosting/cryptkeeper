@@ -42,6 +42,8 @@ class MarketsTable extends Migration
                 $table->integer('primary_currency_id')->unsigned();
                 // Secondary currency, the currency that is bought/sold on this market using the primary currency
                 $table->integer('secondary_currency_id')->unsigned();
+                // The last exchange rate fetched from the CMC API (or null if no value is available)
+                $table->float('last_exchange_rate', 10)->nullable();
                 $table->timestamps();
 
                 $table->engine = 'InnoDB';
