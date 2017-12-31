@@ -28,6 +28,10 @@ class HoldingSprunje extends Sprunje
         'symbol',
         'balance',
         'note',
+        'price_fiat',
+        'price_btc',
+        'value_fiat',
+        'value_btc',
         'created_at'
     ];
 
@@ -36,6 +40,10 @@ class HoldingSprunje extends Sprunje
         'symbol',
         'balance',
         'note',
+        'price_fiat',
+        'price_btc',
+        'value_fiat',
+        'value_btc',
         'created_at'
     ];
 
@@ -53,7 +61,8 @@ class HoldingSprunje extends Sprunje
     public function forMember($member)
     {
         $this->query = $member->holdings()
-            ->joinCurrency();
+            ->joinCurrency()
+            ->joinPrices();
 
         return $this;
     }

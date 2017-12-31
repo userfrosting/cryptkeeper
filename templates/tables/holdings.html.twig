@@ -14,9 +14,9 @@
                 <th class="sorter-metatext" data-column-name="name" data-column-template="#holding-table-column-name">Currency <i class="fa fa-sort"></i></th>
                 <th class="sorter-metatext" data-column-name="symbol" data-column-template="#holding-table-column-symbol">Symbol <i class="fa fa-sort"></i></th>
                 <th class="sorter-metatext" data-column-name="note" data-column-template="#holding-table-column-note">Note <i class="fa fa-sort"></i></th>
-                <th class="sorter-metanum" data-column-name="balance" data-column-template="#holding-table-column-balance">Balance <i class="fa fa-sort"></i></th>
                 <th class="sorter-metanum" data-column-name="value_fiat" data-column-template="#holding-table-column-value-fiat">Value (USD) <i class="fa fa-sort"></i></th>
                 <th class="sorter-metanum" data-column-name="value_btc" data-column-template="#holding-table-column-value-btc">Value (BTC) <i class="fa fa-sort"></i></th>
+                <th class="sorter-metanum" data-column-name="balance" data-column-template="#holding-table-column-balance" data-sorter="false">Balance <i class="fa fa-sort"></i></th>
             </tr>
         </thead>
         <tbody>
@@ -53,7 +53,11 @@
     <script id="holding-table-column-balance" type="text/x-handlebars-template">
         <td>
             {{#if row.balance}}
-                {{currencyUsdFormat row.balance}}
+                {{#ifx row.symbol '==' 'USD'}}
+                    {{currencyUsdFormat row.balance}}
+                {{else}}
+                    {{row.balance}}
+                {{/ifx}}
             {{else}}
                 -
             {{/if}}
@@ -63,7 +67,11 @@
     <script id="holding-table-column-value-fiat" type="text/x-handlebars-template">
         <td>
             {{#if row.value_fiat}}
-                {{currencyUsdFormat row.value_fiat}}
+                {{#ifx site.current_user.fiat_currency '==' 'USD'}}
+                    {{currencyUsdFormat row.value_fiat}}
+                {{else}}
+                    {{row.value_fiat}}
+                {{/ifx}}
             {{else}}
                 -
             {{/if}}

@@ -1,0 +1,22 @@
+{# Configuration variables needed by client-side code (Javascript). #}
+{% autoescape 'js' %}
+    var site = {
+        "uri": {
+            "public": "{{ site.uri.public | raw }}"
+        },
+        "debug": {
+            "ajax": {{ site.debug.ajax ? 'true' : 'false' }}
+        },
+        "csrf": {{ site.csrf | json_encode(constant('JSON_PRETTY_PRINT')) | raw }},
+        "uf_table": {{ site.uf_table | json_encode(constant('JSON_PRETTY_PRINT')) | raw }}
+    };
+
+    {% if current_user %}
+        site.current_user = {
+            "id": "{{ current_user.id }}",
+            "fiat_currency": "{{current_user.aux.fiatCurrency.symbol}}"
+        };
+    {% else %}
+        site.current_user = null;
+    {% endif %}
+{% endautoescape %}
