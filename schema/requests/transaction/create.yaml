@@ -1,0 +1,38 @@
+---
+completed_at:
+  validators:
+    required:
+      message: Please specify the date/time of the transaction.
+market_id:
+  validators:
+    required:
+      message: Please select a market.
+    integer:
+        label: market id
+        message: VALIDATE.INTEGER
+quantity:
+  validators:
+    numeric:
+      message: VALIDATE.NUMERIC
+    required:
+      message: Please enter a quantity.
+price:
+  validators:
+    range:
+      min: 0
+      message: Price cannot be negative.
+    numeric:
+      message: VALIDATE.NUMERIC
+    required:
+      message: Please enter a price.
+fee:
+  validators:
+    range:
+      min: 0
+      message: Fee cannot be negative.
+    numeric:
+      message: VALIDATE.NUMERIC
+    required:
+      message: Please enter the trading fee.
+note:
+  validators:

@@ -8,6 +8,7 @@
 namespace UserFrosting\Sprinkle\Cryptkeeper\Database\Models;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
+use Illuminate\Database\Eloquent\Builder;
 use UserFrosting\Sprinkle\Core\Database\Models\Model;
 
 /**
@@ -27,14 +28,15 @@ trait TransactionUpdateHoldingBalances
          */
         static::created(function ($transaction)
         {
-            if ($transaction->from_holding_id) {
-                $transaction->fromHolding->balance -= $transaction->amount;
-                $transaction->fromHolding->save();
+            if ($transaction->primary_holding_id) {
+                $transaction->primaryHolding->balance -= $transaction->quantity*$transaction->price;
+                $transaction->primaryHolding->balance -= $transaction->fee;
+                $transaction->primaryHolding->save();
             }
 
-            if ($transaction->to_holding_id) {
-                $transaction->toHolding->balance += $transaction->amount;
-                $transaction->toHolding->save();
+            if ($transaction->secondary_holding_id) {
+                $transaction->secondaryHolding->balance += $transaction->quantity;
+                $transaction->secondaryHolding->save();
             }
         });
     }
@@ -59,8 +61,8 @@ class Transaction extends Model
     protected $fillable = [
         'user_id',
         'market_id',
-        'from_holding_id',
-        'to_holding_id',
+        'primary_holding_id',
+        'secondary_holding_id',
         'quantity',
         'price',
         'fee',
@@ -84,18 +86,41 @@ class Transaction extends Model
     }
 
     /**
-     * The holding that was transferred from.
+     * The holding that was used to make the purchase or that was funded by the sale.
      */
-    public function fromHolding()
+    public function primaryHolding()
     {
-        return $this->belongsTo('UserFrosting\Sprinkle\Cryptkeeper\Database\Models\Holding', 'from_holding_id');
+        return $this->belongsTo('UserFrosting\Sprinkle\Cryptkeeper\Database\Models\Holding', 'primary_holding_id');
     }
 
     /**
-     * The account that was transferred to.
+     * The holding that was bought/sold to/from.
      */
-    public function toHolding()
+    public function secondaryHolding()
     {
-        return $this->belongsTo('UserFrosting\Sprinkle\Cryptkeeper\Database\Models\Holding', 'to_holding_id');
+        return $this->belongsTo('UserFrosting\Sprinkle\Cryptkeeper\Database\Models\Holding', 'secondary_holding_id');
+    }
+
+    /**
+     * Joins the market and its currencies for this transfer, so we can do things like sort, search, paginate, etc.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeJoinMarket(Builder $query)
+    {
+        $query->select('transactions.*');
+        $query->addSelect(
+            'primary_currency.symbol as primary_currency_symbol',
+            'secondary_currency.symbol as secondary_currency_symbol',
+            Capsule::raw("(quantity * price) as gross_amount")
+        );
+
+        $query->leftJoin('markets', 'markets.id', '=', 'transactions.market_id');
+
+        $query->leftJoin('currencies as primary_currency', 'primary_currency.id', '=', 'markets.primary_currency_id');
+        $query->leftJoin('currencies as secondary_currency', 'secondary_currency.id', '=', 'markets.secondary_currency_id');
+
+        return $query;
     }
 }

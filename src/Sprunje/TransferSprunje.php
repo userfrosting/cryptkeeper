@@ -21,7 +21,7 @@ use UserFrosting\Sprinkle\Cryptkeeper\Database\Models\Transfer;
  */
 class TransferSprunje extends Sprunje
 {
-    protected $name = 'holdings';
+    protected $name = 'transfers';
 
     protected $sortable = [
         'name',

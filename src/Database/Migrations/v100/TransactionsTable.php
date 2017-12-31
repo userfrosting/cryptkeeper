@@ -40,10 +40,10 @@ class TransactionsTable extends Migration
                 $table->increments('id');
                 $table->integer('user_id')->unsigned();
                 $table->integer('market_id')->unsigned();
-                // Holding that you are selling
-                $table->integer('from_holding_id')->unsigned();
-                // Holding that you are buying
-                $table->integer('to_holding_id')->unsigned();
+                // Holding that you are using to buy/sell
+                $table->integer('primary_holding_id')->unsigned();
+                // Holding that you are buying into or selling from
+                $table->integer('secondary_holding_id')->unsigned();
                 // Quantity of secondary currency bought/sold (e.g. BTC, XMR, ...)
                 $table->double('quantity', 20, 10);
                 // Exchange rate of primary currency to secondary currency (e.g., USD/BTC, BTC/XMR, ...)
@@ -51,6 +51,7 @@ class TransactionsTable extends Migration
                 // Transaction fee (in primary currency)
                 $table->double('fee', 20, 10);
                 $table->text('note');
+                $table->timestamp('completed_at');
                 $table->timestamps();
 
                 $table->engine = 'InnoDB';
@@ -58,8 +59,8 @@ class TransactionsTable extends Migration
                 $table->charset = 'utf8';
                 $table->foreign('user_id')->references('id')->on('users');
                 $table->foreign('market_id')->references('id')->on('markets');
-                $table->foreign('from_holding_id')->references('id')->on('holdings');
-                $table->foreign('to_holding_id')->references('id')->on('holdings');
+                $table->foreign('primary_holding_id')->references('id')->on('holdings');
+                $table->foreign('secondary_holding_id')->references('id')->on('holdings');
             });
         }
     }

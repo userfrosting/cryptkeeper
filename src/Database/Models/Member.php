@@ -96,6 +96,14 @@ class Member extends User
     }
 
     /**
+     * Get the member's transactions.
+     */
+    public function transactions()
+    {
+        return $this->hasMany('UserFrosting\Sprinkle\Cryptkeeper\Database\Models\Transaction', 'user_id');
+    }
+
+    /**
      * Custom mutator for Member property
      */
     public function setFiatCurrencyIdAttribute($value)

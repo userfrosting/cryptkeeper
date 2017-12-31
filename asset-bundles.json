@@ -32,6 +32,42 @@
                 }
             }
         },
+        "js/pages/holdings": {
+            "scripts": [
+                "js/pages/holdings.js"
+            ],
+            "options": {
+                "result": {
+                    "type": {
+                        "scripts": "plain"
+                    }
+                }
+            }
+        },
+        "js/pages/transactions": {
+            "scripts": [
+                "js/pages/transactions.js"
+            ],
+            "options": {
+                "result": {
+                    "type": {
+                        "scripts": "plain"
+                    }
+                }
+            }
+        },
+        "js/pages/transfers": {
+            "scripts": [
+                "js/pages/transfers.js"
+            ],
+            "options": {
+                "result": {
+                    "type": {
+                        "scripts": "plain"
+                    }
+                }
+            }
+        },
         "js/pages/currencies": {
             "scripts": [
                 "js/pages/currencies.js"
@@ -47,30 +83,6 @@
         "js/pages/markets": {
             "scripts": [
                 "js/pages/markets.js"
-            ],
-            "options": {
-                "result": {
-                    "type": {
-                        "scripts": "plain"
-                    }
-                }
-            }
-        },
-        "js/pages/holdings": {
-            "scripts": [
-                "js/pages/holdings.js"
-            ],
-            "options": {
-                "result": {
-                    "type": {
-                        "scripts": "plain"
-                    }
-                }
-            }
-        },
-        "js/pages/transfers": {
-            "scripts": [
-                "js/pages/transfers.js"
             ],
             "options": {
                 "result": {

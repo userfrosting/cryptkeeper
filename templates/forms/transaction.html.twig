@@ -1,0 +1,84 @@
+<form class="js-form" method="{{form.method | default('POST')}}" action="{{site.uri.public}}/{{form.action}}">
+    {% include "forms/csrf.html.twig" %}
+    <div class="js-form-alerts">
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Market</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-institution fa-fw"></i></span>
+                    <select name="market_id" class="form-control select2" type="text" {% if 'market' in form.fields.disabled %}disabled{% endif %}>
+                    <option></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Date/Time</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+                    <input type="text" class="form-control js-date-picker" name="completed_at" autocomplete="off" value="{{transaction.completed_at}}" placeholder="Date/time" {% if 'completed_at' in form.fields.disabled %}disabled{% endif %}>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Quantity</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="quantity" autocomplete="off" value="{{transaction.quantity}}" placeholder="+ for purchase, - for sale" {% if 'quantity' in form.fields.disabled %}disabled{% endif %}>
+                    <span class="input-group-addon js-units-quantity"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Price</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="price" autocomplete="off" value="{{transaction.price}}" placeholder="Unit purchase/sale price" {% if 'price' in form.fields.disabled %}disabled{% endif %}>
+                    <span class="input-group-addon js-units-price"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Trading Fee</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="fee" autocomplete="off" value="{{transaction.fee}}" placeholder="" {% if 'fee' in form.fields.disabled %}disabled{% endif %}>
+                    <span class="input-group-addon js-units-fee"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label>Note</label>
+                <textarea class="form-control" name="note" autocomplete="off" value="{{transaction.note}}" placeholder="Where did you buy/sell?  Why?" {% if 'note' in form.fields.disabled %}disabled{% endif %}></textarea>
+            </div>
+        </div>
+
+    </div><br>
+    <div class="row">
+        <div class="col-xs-6 col-sm-4">
+            <div class="vert-pad">
+                <button type="submit" class="btn btn-block btn-lg btn-success">
+                    {{form.submit_text}}
+                </button>
+            </div>
+        </div>
+        <div class="col-xs-4 col-sm-3 pull-right">
+            <div class="vert-pad">
+                <button type="button" class="btn btn-block btn-lg btn-link" data-dismiss="modal">{{translate("CANCEL")}}</button>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- Include validation rules -->
+<script>
+{% include "pages/partials/page.js.twig" %}
+</script>
