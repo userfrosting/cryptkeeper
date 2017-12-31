@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * UserFrosting (http://www.userfrosting.com)
  *
@@ -19,7 +19,7 @@ class Market extends Model
 
     /**
      * The database table used by the model.
-     * 
+     *
      * @var string
      */
     protected $table = 'markets';
@@ -43,5 +43,23 @@ class Market extends Model
     public function secondaryCurrency()
     {
         return $this->belongsTo('UserFrosting\Sprinkle\Cryptkeeper\Database\Models\Currency', 'secondary_currency_id');
+    }
+
+    /**
+     * Directly joins the related currencies, so we can do things like sort, search, paginate, etc.
+     */
+    public function scopeJoinCurrencies($query)
+    {
+        $query->select(
+            'markets.*',
+            'currencies_primary.symbol as currencies_primary_symbol',
+            'currencies_secondary.symbol as currencies_secondary_symbol'
+        );
+
+        $query
+            ->leftJoin('currencies as currencies_primary', 'markets.primary_currency_id', '=', 'currencies_primary.id')
+            ->leftJoin('currencies as currencies_secondary', 'markets.secondary_currency_id', '=', 'currencies_secondary.id');
+
+        return $query;
     }
 }

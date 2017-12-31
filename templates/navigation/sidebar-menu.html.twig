@@ -11,6 +11,12 @@
     </li>
     {% endif %}
 
+    {% if checkAccess('uri_markets') %}
+    <li>
+        <a href="{{site.uri.public}}/markets"><i class="fa fa-exchange fa-fw"></i> <span>Markets</span></a>
+    </li>
+    {% endif %}
+
     {% if checkAccess('uri_holdings') %}
     <li>
         <a href="{{site.uri.public}}/holdings"><i class="fa fa-briefcase fa-fw"></i> <span>My Holdings</span></a>

@@ -1,0 +1,59 @@
+{# This partial template renders a table to be populated with rows via an AJAX request.
+ # This extends a generic template for paginated tables.
+ #
+ # Note that this template contains a "skeleton" table with an empty table body, and then a block of Handlebars templates which are used
+ # to render the table cells with the data from the AJAX request.
+#}
+
+{% extends "tables/table-paginated.html.twig" %}
+
+{% block table %}
+    <table id="{{table.id}}" class="tablesorter table table-bordered table-hover table-striped" data-sortlist="[[0, 0]]">
+        <thead>
+            <tr>
+                <th class="sorter-metatext" data-column-name="name" data-column-template="#market-table-column-name">Market <i class="fa fa-sort"></i></th>
+                <th class="sorter-metanum" data-column-name="last_exchange_rate" data-column-template="#market-table-column-rate">Last Exchange Rate <i class="fa fa-sort"></i></th>
+                <th class="sorter-metanum" data-column-name="updated_at" data-column-template="#market-table-column-updated">Last Updated <i class="fa fa-sort"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block table_cell_templates %}
+    {# This contains a series of <script> blocks, each of which is a client-side Handlebars template.
+     # Note that these are NOT Twig templates, although the syntax is similar.  We wrap them in the `verbatim` tag,
+     # so that Twig will output them directly into the DOM instead of trying to treat them like Twig templates.
+     #
+     # These templates require handlebars-helpers.js, moment.js
+    #}
+    {% verbatim %}
+    <script id="market-table-column-name" type="text/x-handlebars-template">
+        <td>
+            {{row.primary_currency.symbol}}/{{row.secondary_currency.symbol}}
+        </td>
+    </script>
+
+    <script id="market-table-column-rate" type="text/x-handlebars-template">
+        <td>
+            {{#ifx row.primary_currency.symbol '==' 'USD'}}
+                {{currencyUsdFormat row.last_exchange_rate}}
+            {{else}}
+                {{row.last_exchange_rate}}
+            {{/ifx}}
+        </td>
+    </script>
+
+    <script id="market-table-column-updated" type="text/x-handlebars-template">
+        {{#if row.updated_at }}
+        <td data-num="{{dateFormat row.updated_at format='x'}}">
+            {{dateFormat row.updated_at format="dddd"}}<br>{{dateFormat row.updated_at format="MMM Do, YYYY h:mm a"}}
+        {{ else }}
+        <td data-num="0">
+            <i>{% endverbatim %}{{translate("UNKNOWN")}}{% verbatim %}</i>
+        {{/if }}
+        </td>
+    </script>
+    {% endverbatim %}
+{% endblock %}
