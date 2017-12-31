@@ -14,7 +14,7 @@
                 <th class="sorter-metatext" data-column-name="name" data-column-template="#holding-table-column-name">Currency <i class="fa fa-sort"></i></th>
                 <th class="sorter-metatext" data-column-name="symbol" data-column-template="#holding-table-column-symbol">Symbol <i class="fa fa-sort"></i></th>
                 <th class="sorter-metatext" data-column-name="note" data-column-template="#holding-table-column-note">Note <i class="fa fa-sort"></i></th>
-                <th class="sorter-metanum" data-column-name="value_fiat" data-column-template="#holding-table-column-value-fiat">Value (USD) <i class="fa fa-sort"></i></th>
+                <th class="sorter-metanum" data-column-name="value_fiat" data-column-template="#holding-table-column-value-fiat">Value ({{current_user.aux.fiatCurrency.symbol}}) <i class="fa fa-sort"></i></th>
                 <th class="sorter-metanum" data-column-name="value_btc" data-column-template="#holding-table-column-value-btc">Value (BTC) <i class="fa fa-sort"></i></th>
                 <th class="sorter-metanum" data-column-name="balance" data-column-template="#holding-table-column-balance" data-sorter="false">Balance <i class="fa fa-sort"></i></th>
             </tr>

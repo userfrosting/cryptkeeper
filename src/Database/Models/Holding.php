@@ -77,7 +77,7 @@ class Holding extends Model
     {
         $bitcoin = Currency::where('symbol', 'BTC')->first();
 
-        $rawFiat = 'coalesce(markets_fiat.last_exchange_rate, 1/nullif(markets_fiat_reverse.last_exchange_rate, 0), 1)';
+        $rawFiat = 'coalesce(markets_fiat.last_exchange_rate, 1/nullif(markets_fiat_reverse.last_exchange_rate, 0))';
         $rawBtc = 'coalesce(markets_btc.last_exchange_rate, 1/nullif(markets_btc_reverse.last_exchange_rate, 0), 1)';
 
         $query->addSelect('holdings.*');
@@ -88,17 +88,17 @@ class Holding extends Model
             Capsule::raw("($rawBtc * balance) as value_btc")
         );
 
-        $query->leftJoin('users', 'users.id', '=', 'holdings.user_id');
+        $query->leftJoin('members', 'members.id', '=', 'holdings.user_id');
         // Join market for user's fiat currency
         $query->leftJoin('markets as markets_fiat', function ($join) {
-            $join->on('markets_fiat.primary_currency_id', '=', 'users.id')
+            $join->on('markets_fiat.primary_currency_id', '=', 'members.fiat_currency_id')
                  ->on('markets_fiat.secondary_currency_id', '=', 'holdings.currency_id');
         });
 
         // Join reverse market for user's fiat currency
         $query->leftJoin('markets as markets_fiat_reverse', function ($join) {
             $join->on('markets_fiat_reverse.primary_currency_id', '=', 'holdings.currency_id')
-                 ->on('markets_fiat_reverse.secondary_currency_id', '=', 'users.id');
+                 ->on('markets_fiat_reverse.secondary_currency_id', '=', 'members.fiat_currency_id');
         });
 
         // Join market for bitcoin
