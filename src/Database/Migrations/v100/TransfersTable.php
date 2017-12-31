@@ -39,7 +39,7 @@ class TransfersTable extends Migration
                 $table->increments('id');
                 $table->integer('user_id')->unsigned();
                 $table->integer('holding_id')->unsigned();
-                $table->float('amount')->default(0);
+                $table->double('amount', 20, 10)->default(0);
                 $table->text('note');
                 $table->timestamps();
 

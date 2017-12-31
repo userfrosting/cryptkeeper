@@ -39,7 +39,7 @@ class HoldingsTable extends Migration
                 $table->increments('id');
                 $table->integer('user_id')->unsigned();
                 $table->integer('currency_id')->unsigned();
-                $table->float('balance', 10)->default(0);
+                $table->double('balance', 20, 10)->default(0);
                 $table->text('note');
                 $table->timestamps();
 

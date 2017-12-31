@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * UserFrosting (http://www.userfrosting.com)
  *
@@ -20,7 +20,7 @@ class Holding extends Model
 
     /**
      * The database table used by the model.
-     * 
+     *
      * @var string
      */
     protected $table = 'holdings';

@@ -43,7 +43,7 @@ class MarketsTable extends Migration
                 // Secondary currency, the currency that is bought/sold on this market using the primary currency
                 $table->integer('secondary_currency_id')->unsigned();
                 // The last exchange rate fetched from the CMC API (or null if no value is available)
-                $table->float('last_exchange_rate', 10)->nullable();
+                $table->double('last_exchange_rate', 20, 10)->nullable();
                 $table->timestamps();
 
                 $table->engine = 'InnoDB';
@@ -61,18 +61,42 @@ class MarketsTable extends Migration
     public function seed()
     {
         $usd = Currency::where('symbol', 'USD')->first();
+        $cad = Currency::where('symbol', 'CAD')->first();
         $gbp = Currency::where('symbol', 'GBP')->first();
+        $aud = Currency::where('symbol', 'AUD')->first();
+        $eur = Currency::where('symbol', 'EUR')->first();
         $btc = Currency::where('symbol', 'BTC')->first();
         $eth = Currency::where('symbol', 'ETH')->first();
         $ltc = Currency::where('symbol', 'LTC')->first();
+        $xrp = Currency::where('symbol', 'XRP')->first();
+        $bcc = Currency::where('symbol', 'BCC')->first();
+        $ada = Currency::where('symbol', 'ADA')->first();
+        $iota = Currency::where('symbol', 'MIOTA')->first();
+        $xem = Currency::where('symbol', 'XEM')->first();
+        $dash = Currency::where('symbol', 'DASH')->first();
+        $xlm = Currency::where('symbol', 'XLM')->first();
+        $xmr = Currency::where('symbol', 'XMR')->first();
+        $etn = Currency::where('symbol', 'ETN')->first();
 
         $markets = [
             'usd-btc' => new Market([
                 'primary_currency_id' => $usd->id,
                 'secondary_currency_id' => $btc->id
             ]),
+            'cad-btc' => new Market([
+                'primary_currency_id' => $cad->id,
+                'secondary_currency_id' => $btc->id
+            ]),
             'gbp-btc' => new Market([
                 'primary_currency_id' => $gbp->id,
+                'secondary_currency_id' => $btc->id
+            ]),
+            'aud-btc' => new Market([
+                'primary_currency_id' => $aud->id,
+                'secondary_currency_id' => $btc->id
+            ]),
+            'eur-btc' => new Market([
+                'primary_currency_id' => $eur->id,
                 'secondary_currency_id' => $btc->id
             ]),
             'btc-eth' => new Market([
@@ -82,6 +106,42 @@ class MarketsTable extends Migration
             'btc-ltc' => new Market([
                 'primary_currency_id' => $btc->id,
                 'secondary_currency_id' => $ltc->id
+            ]),
+            'btc-xrp' => new Market([
+                'primary_currency_id' => $btc->id,
+                'secondary_currency_id' => $xrp->id
+            ]),
+            'btc-bcc' => new Market([
+                'primary_currency_id' => $btc->id,
+                'secondary_currency_id' => $bcc->id
+            ]),
+            'btc-ada' => new Market([
+                'primary_currency_id' => $btc->id,
+                'secondary_currency_id' => $ada->id
+            ]),
+            'btc-iota' => new Market([
+                'primary_currency_id' => $btc->id,
+                'secondary_currency_id' => $iota->id
+            ]),
+            'btc-xem' => new Market([
+                'primary_currency_id' => $btc->id,
+                'secondary_currency_id' => $xem->id
+            ]),
+            'btc-dash' => new Market([
+                'primary_currency_id' => $btc->id,
+                'secondary_currency_id' => $dash->id
+            ]),
+            'btc-xlm' => new Market([
+                'primary_currency_id' => $btc->id,
+                'secondary_currency_id' => $xlm->id
+            ]),
+            'btc-xmr' => new Market([
+                'primary_currency_id' => $btc->id,
+                'secondary_currency_id' => $xmr->id
+            ]),
+            'btc-etn' => new Market([
+                'primary_currency_id' => $btc->id,
+                'secondary_currency_id' => $etn->id
             ])
         ];
 

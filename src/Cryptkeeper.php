@@ -9,6 +9,7 @@ namespace UserFrosting\Sprinkle\Cryptkeeper;
 
 use Carbon\Carbon;
 use RocketTheme\Toolbox\Event\Event;
+use UserFrosting\Sprinkle\Core\Facades\Debug;
 use UserFrosting\Sprinkle\Cryptkeeper\Database\Models\Market;
 use UserFrosting\System\Sprinkle\Sprinkle;
 
@@ -26,12 +27,18 @@ class Cryptkeeper extends Sprinkle
     {
         $config = $this->ci->config;
 
-        $lastUpdatedAt = new Carbon(Market::max('updated_at'));
+        try {
+            $lastUpdatedAt = new Carbon(Market::max('updated_at'));
+        } catch (\Exception $e) {
+            echo 'Markets table does not yet exist.  Skipping update.';
+            return;
+        }
+
         // Add seconds from the last update time to get the next time we should update
         $updateAt = $lastUpdatedAt->addSeconds($config['site.currencies.refresh_interval']);
 
         // If we're past the update deadline, we need to update
-        if (Carbon::now()->gte($updateAt)) {
+        if (is_null($lastUpdatedAt) || Carbon::now()->gte($updateAt)) {
             $cmc = $this->ci->cmc;
             $cmc->load();
         }

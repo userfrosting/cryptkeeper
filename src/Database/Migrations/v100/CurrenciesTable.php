@@ -70,6 +70,11 @@ class CurrenciesTable extends Migration
                 'name_cmc' => 'GBP',
                 'symbol' => 'GBP'
             ]),
+            'eur' => new Currency([
+                'name' => 'Euro',
+                'name_cmc' => 'EUR',
+                'symbol' => 'EUR'
+            ]),
             'btc' => new Currency([
                 'name' => 'Bitcoin',
                 'name_cmc' => 'bitcoin',

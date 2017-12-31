@@ -45,11 +45,11 @@ class TransactionsTable extends Migration
                 // Holding that you are buying
                 $table->integer('to_holding_id')->unsigned();
                 // Quantity of secondary currency bought/sold (e.g. BTC, XMR, ...)
-                $table->float('quantity', 10);
+                $table->double('quantity', 20, 10);
                 // Exchange rate of primary currency to secondary currency (e.g., USD/BTC, BTC/XMR, ...)
-                $table->float('price', 10);
+                $table->double('price', 20, 10);
                 // Transaction fee (in primary currency)
-                $table->float('fee', 10);
+                $table->double('fee', 20, 10);
                 $table->text('note');
                 $table->timestamps();
 
