@@ -6,25 +6,30 @@
 {% endblock %}
 
 {# Overrides blocks in head of base template #}
-{% block page_title %}Markets{% endblock %}
+{% block page_title %}Transfers{% endblock %}
 
 {% block page_description %}{% endblock %}
 
 {% block body_matter %}
     <div class="row">
         <div class="col-md-12">
-            <div id="widget-markets" class="box box-primary">
+            <div id="widget-transfers" class="box box-primary">
                 <div class="box-header">
-                    <h3 class="box-title"><i class="fa fa-fw fa-institution"></i> Markets</h3>
+                    <h3 class="box-title"><i class="fa fa-fw fa-exchange"></i> Transfers</h3>
                     {% include "tables/table-tool-menu.html.twig" %}
                 </div>
                 <div class="box-body">
-                    {% include "tables/markets.html.twig" with {
+                    {% include "tables/transfers.html.twig" with {
                             "table" : {
-                                "id" : "table-markets"
+                                "id" : "table-transfers"
                             }
                         }
                     %}
+                </div>
+                <div class="box-footer">
+                    <button type="button" class="btn btn-success js-transfer-create">
+                        <i class="fa fa-plus-square"></i>  Make transfer
+                    </button>
                 </div>
             </div>
         </div>
@@ -40,6 +45,6 @@
     {{ assets.js('js/form-widgets') | raw }}
 
     <!-- Include page-specific JS -->
-    {{ assets.js('js/pages/markets') | raw }}
+    {{ assets.js('js/pages/transfers') | raw }}
 
 {% endblock %}

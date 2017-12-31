@@ -5,6 +5,12 @@
     </li>
     {% endif %}
 
+    {% if checkAccess('uri_transfers') %}
+    <li>
+        <a href="{{site.uri.public}}/transfers"><i class="fa fa-exchange fa-fw"></i> <span>Transfers</span></a>
+    </li>
+    {% endif %}
+
     {% if checkAccess('uri_currencies') %}
     <li>
         <a href="{{site.uri.public}}/currencies"><i class="fa fa-money fa-fw"></i> <span>Currencies</span></a>
@@ -13,7 +19,7 @@
 
     {% if checkAccess('uri_markets') %}
     <li>
-        <a href="{{site.uri.public}}/markets"><i class="fa fa-exchange fa-fw"></i> <span>Markets</span></a>
+        <a href="{{site.uri.public}}/markets"><i class="fa fa-institution fa-fw"></i> <span>Markets</span></a>
     </li>
     {% endif %}
 

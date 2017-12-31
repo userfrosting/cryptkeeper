@@ -1,0 +1,16 @@
+---
+currency_id:
+  validators:
+    required:
+      message: Please select a currency.
+    integer:
+        label: Currency id
+        message: VALIDATE.INTEGER
+amount:
+  validators:
+    numeric:
+      message: VALIDATE.NUMERIC
+    required:
+      message: Please enter an amount.
+note:
+  validators:

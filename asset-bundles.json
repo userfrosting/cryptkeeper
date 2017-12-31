@@ -67,6 +67,18 @@
                     }
                 }
             }
+        },
+        "js/pages/transfers": {
+            "scripts": [
+                "js/pages/transfers.js"
+            ],
+            "options": {
+                "result": {
+                    "type": {
+                        "scripts": "plain"
+                    }
+                }
+            }
         }
     }
 }

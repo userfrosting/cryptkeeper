@@ -1,0 +1,57 @@
+<form class="js-form" method="{{form.method | default('POST')}}" action="{{site.uri.public}}/{{form.action}}">
+    {% include "forms/csrf.html.twig" %}
+    <div class="js-form-alerts">
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Account</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-briefcase fa-fw"></i></span>
+                    <select name="currency_id" class="form-control select2" type="text" {% if 'holding' in form.fields.disabled %}disabled{% endif %}>
+                    <option></option>
+                    {% for currency in currencies %}
+                        <option value="{{currency.id}}" {% if (currency.id == transfer.holding.currency_id) %}selected{% endif %}>{{currency.name}}</option>
+                    {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Amount</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-money fa-fw"></i></span>
+                    <input type="text" class="form-control" name="amount" autocomplete="off" value="{{transfer.amount}}" placeholder="+ for deposit, - for withdrawal" {% if 'amount' in form.fields.disabled %}disabled{% endif %}>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label>Note</label>
+                <textarea class="form-control" name="note" autocomplete="off" value="{{transfer.note}}" placeholder="Description of transfer" {% if 'note' in form.fields.disabled %}disabled{% endif %}></textarea>
+            </div>
+        </div>
+
+    </div><br>
+    <div class="row">
+        <div class="col-xs-6 col-sm-4">
+            <div class="vert-pad">
+                <button type="submit" class="btn btn-block btn-lg btn-success">
+                    {{form.submit_text}}
+                </button>
+            </div>
+        </div>
+        <div class="col-xs-4 col-sm-3 pull-right">
+            <div class="vert-pad">
+                <button type="button" class="btn btn-block btn-lg btn-link" data-dismiss="modal">{{translate("CANCEL")}}</button>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- Include validation rules -->
+<script>
+{% include "pages/partials/page.js.twig" %}
+</script>
