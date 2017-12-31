@@ -5,6 +5,18 @@
     </li>
     {% endif %}
 
+    {% if checkAccess('uri_holdings') %}
+    <li>
+        <a href="{{site.uri.public}}/holdings"><i class="fa fa-briefcase fa-fw"></i> <span>My Holdings</span></a>
+    </li>
+    {% endif %}
+
+    {% if checkAccess('uri_holdings') %}
+    <li>
+        <a href="{{site.uri.public}}/transactions"><i class="fa fa-handshake-o fa-fw"></i> <span>Transactions</span></a>
+    </li>
+    {% endif %}
+
     {% if checkAccess('uri_transfers') %}
     <li>
         <a href="{{site.uri.public}}/transfers"><i class="fa fa-exchange fa-fw"></i> <span>Transfers</span></a>
@@ -20,12 +32,6 @@
     {% if checkAccess('uri_markets') %}
     <li>
         <a href="{{site.uri.public}}/markets"><i class="fa fa-institution fa-fw"></i> <span>Markets</span></a>
-    </li>
-    {% endif %}
-
-    {% if checkAccess('uri_holdings') %}
-    <li>
-        <a href="{{site.uri.public}}/holdings"><i class="fa fa-briefcase fa-fw"></i> <span>My Holdings</span></a>
     </li>
     {% endif %}
 

@@ -149,6 +149,7 @@ class TransferController extends SimpleController
         $classMapper = $this->ci->classMapper;
 
         $sprunje = new TransferSprunje($classMapper, $params);
+        $sprunje->forMember($currentUser);
 
         // Be careful how you consume this data - it has not been escaped and contains untrusted user-supplied content.
         // For example, if you plan to insert it into an HTML DOM, you must escape it on the client side (or use client-side templating).
