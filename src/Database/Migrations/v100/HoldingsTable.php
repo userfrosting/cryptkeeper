@@ -40,7 +40,7 @@ class HoldingsTable extends Migration
                 $table->integer('user_id')->unsigned();
                 $table->integer('currency_id')->unsigned();
                 $table->double('balance', 20, 10)->default(0);
-                $table->text('note');
+                $table->text('note')->nullable();
                 $table->timestamps();
 
                 $table->engine = 'InnoDB';
