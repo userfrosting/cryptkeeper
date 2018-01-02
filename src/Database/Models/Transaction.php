@@ -66,7 +66,8 @@ class Transaction extends Model
         'quantity',
         'price',
         'fee',
-        'note'
+        'note',
+        'completed_at'
     ];
 
     /**
