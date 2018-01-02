@@ -49,7 +49,9 @@ class Permissions extends Migration
     {
         foreach ($this->getPermissions() as $permission) {
             $permission = Permission::where($permission)->first();
-            $permission->delete();
+            if ($permission) {
+                $permission->delete();
+            }
         }
     }
 
