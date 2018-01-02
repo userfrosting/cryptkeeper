@@ -73,6 +73,12 @@ class Permissions extends Migration
                 'description' => 'View the page with the list of your transfers.'
             ],
             [
+                'slug' => 'uri_transactions',
+                'name' => 'Transactions page',
+                'conditions' => 'always()',
+                'description' => 'View the page with the list of your transactions.'
+            ],
+            [
                 'slug' => 'uri_currencies',
                 'name' => 'Currencies page',
                 'conditions' => 'always()',
